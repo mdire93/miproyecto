@@ -1,0 +1,101 @@
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+
+{% block body %}
+
+    <h5>FORMULARIO DE DATOS PERSONALES</h5>
+    <form >
+    <div class="col-12">
+            <div class="row form-group ">
+            <div class="col-4 "> 
+                <label class="fom-label" for="pais" >Pais: * </label>
+                <select name="pais" class=" form-control" id="pais" onChange="comp_tipo()">
+                    <option value="esp">España</option>
+                    <option value="fr">Francia</option>
+                    <option value="uy">Uruguay</option>
+                    <option value="ar">Argentina</option>
+                    <option value="br">Brasil</option>
+                </select>
+            </div>
+            <div class="col-4">            
+                <label class=" fom-label" for="tipo" >Tipo de persona: * </label>
+                <select name="tipo"  class="form-control " id="tipo" onChange="comp_tipo()">
+                    <option value="fisica">Física</option>
+                    <option value"juridica">Jurídica</option>
+                </select>
+            </div>
+        </div>
+            <div class="row form-group ">
+            <div class="col-4"> 
+                <label class=" fom-label nombre_persona" for="nombre" id="etq_nombre">Nombre: * </label>
+                <input class=" form-control " type="text" name="nombre" id="persona_nombre" onchange="comp_nombre()" required >
+                <span id="nombre_error" class="error">Este campo no es correcto</span>
+            </div>
+            <div class="col-4">
+                <label class=" fom-label" for="apellidos" id="etq_apellidos" >Apellidos: * </label>
+                <input class=" form-control" type="text" name="apellidos" id="persona_apellidos" onchange="comp_ape()" required >
+                <span id="ape_error" class="error">Este campo no es correcto</span>
+            </div>
+        </div>
+            <div class="row form-group ">
+            <div class="col-12"> 
+            <label class=" fom-label" for="nombre_sociedad" >Nombre de la sociedad: * </label>
+            <input class=" form-control" type="text" name="nombre_sociedad" id="sociedad" onchange="comp_sociedad()" required >
+            <span id="sociedad_error" class="error">Este campo no es correcto</span>
+            </div>
+        </div>
+        <p class="text-center"> Documentación necesaria:  </p>
+            <div class="row form-group ">
+                <div class="col-3">            
+                    <label  class=" fom-label" for="documento" id="cif"> CIF: * </label>
+                    <input class="form-control" type="text" name="documento" id="doc_cif" onChange="comp_cif()" required >
+                    <span id="cif_error" class="error">Este campo no es correcto</span>
+                </div>
+                <div class="col-3">
+                    <label class="form-label" for="documento" id="dni"> DNI: * </label>
+                    <input class=" form-control" type="text" name="documento" id="doc_dni" onChange="comp_dni()" required >
+                    <span id="dni_error" class="error">Este campo no es correcto</span>
+                </div>
+                <div class="col-3">
+                    <label class="form-label" for="documento" id="nie"> NIE: * </label>
+                    <input class="form-control" type="text" name="documento"  id="doc_nie" onChange="comp_nie()" required >
+                    <span id="nie_error" class="error">Este campo no es correcto</span>
+                </div>
+                <div class="col-3">
+                    <label class="form-label" for="documento" id="pasaporte"> Pasaporte: * </label>
+                    <input class="form-control" type="text" name="documento" id="doc_pasaporte" required onchange="comp_pasaporte()" >
+                    <span id="pasaporte_error" class="error">Este campo no es correcto</span>
+                </div>
+        </div>
+        
+        <p class="text-center"> Dirección:  </p>
+
+        <div class="row form-group ">
+                <label class=" form-label" for="direccion" >Dirección: * </label>
+                <input class=" form-control" type="text" name="direccion" id="direccion" onChange="comp_direccion()" required >
+                <span id="direccion_error" class="error">Este campo no es correcto</span>
+        </div>
+            <div class="row form-group">
+                <label class=" form-label" for="cp" >Código postal: * </label>
+                <input class=" form-control" type="number" maxlength="4" name="cp" id="cp" onchange="comp_cp()" required >
+                <span id="cp_error" class="error">Este campo no es correcto</span>
+            </div>
+       
+       <input class="btn btn-secondary w-100" type="submit">
+
+    </div>
+    </form>
+    
+
+<script src="{{ asset ('js/myjs.js')}}"></script>
+    
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
+
+

@@ -1,0 +1,44 @@
+
+{% extends 'base.html.twig' %}
+        {% block stylesheets %}
+        {{parent()}}
+
+        {% endblock %}
+        
+
+        {% block body %}
+        
+       
+        {% if sector is defined %}
+         <h5> EDITAR SERCTOR  </h5>
+        {% else %}
+         <h5> NUEVO SERCTOR  </h5>
+         {% endif %}
+        <form 
+          {% if sector is defined %} 
+                action="{{ path ('modifico_sector', {'id' : sector.id } )}}" 
+                {% else %}
+                action="{{('/crear_sector')}}"
+          {% endif %}
+                 name="nuevo">
+                <label class=" form-label"  for="nombre">Nombre del sector: *</label>
+                <input class=" form-control"  type="text" name="nombre" 
+                        {% if sector is defined %} 
+                                value="{{sector.nombre}}" 
+                        {% endif %} required>
+                <input class=" mt-3 mb-3 w-100"  type="submit" 
+                        {% if sector is defined %} 
+                                value="Editar sector" 
+                        {% else %}
+                                value="Crear sector"
+                        {% endif %}
+                 name="crear">
+        </form>
+
+        <a href="{{('/sectores')}}"><button>Atrás</button></a>
+
+        
+        {% endblock %}
+        {% block javascripts %}
+
+        {% endblock %}

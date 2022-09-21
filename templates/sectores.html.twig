@@ -1,0 +1,54 @@
+
+{% extends 'base.html.twig' %}
+        {% block stylesheets %}
+        {{parent()}}
+
+        {% endblock %}
+
+
+        {% block body %}
+
+
+        <h5>LISTADO DE SECTORES </h5>
+        
+        
+        
+        <table class="table-responsive-sm table">
+                <thead class="table-title">
+                        <tr>
+                                <th colspan="2">Sectores</th>
+                        </tr>
+                </thead>
+                <tbody>
+                {% for sector in sectores %}
+                        {% if app.session.get('rol') == 'admin' %}
+                        <tr>
+                                <td> {{ sector.nombre }} </td>
+                        {% else %}
+                                {% for mi_sector in mis_sectores %}
+                                        {% if mi_sector.idSector == sector.id %}
+                                                <tr>
+                                                <td> {{ sector.nombre }} </td>
+                                        {% endif %}
+                                {% endfor %}
+                        {% endif %}
+                                <!-- solo admin -->
+                                {% if app.session.get('rol') == 'admin' %}
+                                        <td> <a href="{{ path ('editar_sector' , {'id' : sector.id }) }}"><button class="btn btn-secondary"> <i class="fa fa-edit"></i> Editar</button></a> 
+                                        <a href="{{ path ('eliminar_sector' , {'id' : sector.id }) }}"><button class="btn btn-secondary"> <i class="fa fa-minus-circle "></i> Eliminar</button></a>
+                                        </td>
+                                {% endif %}
+                        </tr>
+                {% endfor %}
+                </tbody>
+        </table>
+
+        {% if app.session.get('rol') == 'admin' %}
+        <a href="{{('/nuevo_sector')}}"><button>Nuevo sector</button></a>
+        {% endif %}
+
+        
+        {% endblock %}
+        {% block javascripts %}
+
+        {% endblock %}

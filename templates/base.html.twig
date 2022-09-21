@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"> 
+        <!-- Bootstrap CSS -->
+        
+        <link href="{{ asset ('css/bootstrap.css') }}" rel="stylesheet" >
+        <link href="{{ asset ('estilo.css') }}" rel="stylesheet" >
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+         <script src= "{{ asset ('js/jquery-3.6.0.min.js')}}"></script>
+         <script src="{{ asset ('js/myjs.js')}}"></script>
+        <title>{% block title %}PRINCIPAL!{% endblock %}</title>
+        {% block stylesheets %}
+        
+        {% endblock %}
+    </head>
+    <body> 
+    
+         <h3 class="title-menu">API EMPRESAS/DIVISA </h3>
+        <nav class="menu" id="mimenu">
+        
+                <a role="button" class="icon-menu" onclick="myFunction()">
+                    <i class="fa fa-bars"></i>
+                </a>
+
+        {% if app.session.get('usuario') %}   
+
+                <a class="menu-list" href="{{('/sectores')}}">SECTORES</a>
+                <a class="menu-list" href="{{('/empresas')}}">EMPRESAS</a>
+                <a class="menu-list" href="{{('/usuarios')}}">USUARIOS</a>
+                
+            <div class="sesion">
+            Bienvenid@ {{app.session.get('usuario')}}
+             <button ><a  href="{{'/logout'}}">LOGOUT</a></button> 
+            </div>
+        
+        {% else %}
+                <a class="menu-list" href="{{('/')}}">CRUD EMPRESAS/SECTORES</a>
+                <a class="menu-list" href="{{('/monedas')}}">API CAMBIO DE DIVISA</a>
+                <a class="menu-list" href="{{('/formulario')}}">PARTE FRONTEND (FORMULARIO)</a>
+        {% endif %}
+
+        </nav>
+
+            <footer class="pie">
+                <p>Proyecto creado por: Míriam Díaz</p>
+            </footer>
+            
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+        
+        
+       
+        {% endblock %}
+    </body>
+</html>

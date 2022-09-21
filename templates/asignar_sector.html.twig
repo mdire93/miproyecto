@@ -1,0 +1,31 @@
+
+
+{% extends 'base.html.twig' %}
+        {% block stylesheets %}
+        {{parent()}}
+
+        {% endblock %}
+        
+        {% block body %}
+        
+       
+         <h5> ASIGNAR SECTOR A: {{ usuario.usuario }} </h5>
+
+        <form action="{{ path ('asignar' , {'id' : usuario.id } ) }}" name="nuevo">
+                <label class="form-label" for="sector">Sector: </label>
+                <select class="form-control" name="sector">
+                {% for sector in sectores %}
+                        <option value="{{sector.id}}"> {{sector.nombre}}</option>
+                {% endfor %}
+                </select>
+
+                <input class="mt-3 mb-3 w-100" type="submit" value="Asignar" name="crear">
+        </form>
+
+
+        <a href="{{('/usuarios')}}"><button>Atrás</button></a>
+        
+        {% endblock %}
+        {% block javascripts %}
+
+        {% endblock %}

@@ -1,0 +1,58 @@
+
+{% extends 'base.html.twig' %}
+        {% block stylesheets %}
+        {{parent()}}
+
+        {% endblock %}
+        
+
+        {% block body %}
+
+        {% if empresa is defined %}
+         <h5> EDITAR EMPRESA  </h5>
+        {% else %}
+        <h5> NUEVA EMPRESA  </h5>
+         {% endif %}
+        
+        <form 
+                 {% if empresa is defined %}
+                 action="{{ path ('modifico_empresa', {'id' : empresa.id } )}}" 
+                 {% else %}
+                  action="{{('/crear_empresa')}}" 
+                  {% endif %}
+                  name="nuevo">
+                
+                <label class=" form-label" for="nombre">Nombre de la empresa: *</label>
+                <input class=" form-control" type="text" name="nombre" 
+                        {% if empresa is defined %}
+                                value="{{empresa.nombre}}"
+                        {% endif %}
+                        required>
+                <label class=" form-label"  for="email">Email de la empresa: *</label>
+                <input class=" form-control" type="text" name="email" 
+                        {% if empresa is defined %}
+                                value="{{empresa.email}}"
+                        {% endif %}
+                        required>
+                <label class=" form-label"  for="sector">Sector de la empresa: </label>
+                
+                <select class=" form-control" name="sector">
+                        {% for sector in sectores %}
+                                <option value="{{sector.id }}"
+                                {% if empresa is defined %}
+                                        {% if empresa.idSector == sector.id %}
+                                                selected
+                                        {% endif %}
+                                {% endif %}
+                                > {{sector.nombre}}</option>
+                        {% endfor %}
+                </select>
+                <input class="mt-3 mb-3 w-100" type="submit" value="Crear sector" name="crear">
+        </form>
+
+        
+        <a href="{{('/empresas')}}"><button>Atrás</button></a>
+        {% endblock %}
+        {% block javascripts %}
+
+        {% endblock %}

@@ -1,0 +1,53 @@
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+
+{% block body %}
+
+    <h5>FORMULARIO CAMBIO DE DIVISA</h5>
+    
+
+
+
+    <form  action="{{('/conversion')}}">
+        <label class="mb-1" for="origen" >Moneda de origen: * </label>
+        <select name="origen" class="form-control">
+            {% if monedas is defined %}
+            {% for key, monedas in monedas.rates %}
+            <option value="{{key}}"> {{ key }}</option>
+            {% endfor %}
+            {% endif %}
+        </select>
+        <label class="mb-1" for="destino" >Moneda de destino: * </label>
+        <select name="destino" class="form-control" >
+             {% if monedas is defined %}
+            {% for key, monedas in monedas.rates %}
+            <option value="{{key}}"> {{ key }}</option>
+            {% endfor %}
+            {% endif %}
+        </select>
+
+        <label class="mb-1" for="importe" >Importe: * </label>
+        <input type="number" name="importe" class="form-control"  required >
+        <label class="mb-1" for="fecha" >Fecha: * </label>
+        <input type="date" name="fecha"  class="form-control" required >
+
+       
+        <input class="mt-3 mb-3 form-control" type="submit" value="Comprobar">
+    </form>
+
+ {% if valor is defined %}
+ <h4> {{valor}}  </h4>
+ {% endif %}
+    
+
+{% endblock %}
+
+{% block javascripts %}
+   
+{% endblock %}
+
+

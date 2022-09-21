@@ -1,0 +1,69 @@
+
+{% extends 'base.html.twig' %}
+        {% block stylesheets %}
+        {{parent()}}
+
+        {% endblock %}
+
+
+
+        {% block body %}
+        
+        <h5> LISTADO DE USUARIOS </h5>
+        
+        
+        <table class="table-responsive-sm table " >
+                <thead class="table-title">
+                        <tr>
+                            <th>Usuario</th>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Email</th>
+                            <th>Sectores</th>
+                            <th>Rol</th>
+                             <th></th>
+                        </tr>
+                </thead>
+                <tbody>
+                        {% for usuario in usuarios %}
+                                <tr>
+                                    <td>{{ usuario.usuario }} </td>
+                                    <td>{{ usuario.nombre }} </td>
+                                    <td>{{ usuario.apellidos }} </td>
+                                    <td>{{ usuario.email }}  </td>
+                                    <td><ul class="sectores-list">
+                                    {% for usuariosector in usuariossectores %}
+                                        {% if usuariosector.idUsuario == usuario.id %}
+                                                {% for sector in sectores %}
+                                                        {% if sector.id == usuariosector.idSector %}
+                                                        <li class="sector-list">{{ sector.nombre }}
+                                                        <a href="{{ path ('quitar_sector' , {'id' : usuariosector.id }) }}">
+                                                                <button class=" btn" class="btn"><i class="fa fa-minus-circle"></i></button></a>
+                                                        </li> 
+                                                        {% endif %}
+                                                {% endfor %}
+                                        {% endif %}
+                                     {% endfor %}
+                                     <a href="{{ path ('asignar_sector' , {'id' : usuario.id }) }}"><button class=" btn btn-secondary" ><i class="fa fa-plus"></i> Asignar</button></a>
+                                     </ul></td>
+                                    <td>{{ usuario.rol }} </td>
+                                    <!-- solo admin -->
+                                {% if app.session.get('rol') == 'admin' %}
+                                        <td> <a href="{{ path ('editar_usuario' , {'id' : usuario.id }) }}"><button class=" btn btn-secondary"> <i class="fa fa-edit"></i> Editar</button></a> 
+                                        <a href="{{ path ('eliminar_usuario' , {'id' : usuario.id }) }}"><button class=" btn btn-secondary" <i class="fa fa-minus-circle "></i> Eliminar</button></a>
+                                        </td>
+                                {% endif %}
+                                </tr> 
+                        {% endfor %}  
+                </tbody>
+        </table>
+
+
+        {% if app.session.get('rol') == 'admin' %}
+                <a href="{{('/nuevo_usuario')}}"><button>Nuevo usuario</button></a>
+        {% endif %}
+
+        {% endblock %}
+        {% block javascripts %}
+
+        {% endblock %}

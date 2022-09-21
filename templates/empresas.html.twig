@@ -1,0 +1,117 @@
+
+{% extends 'base.html.twig' %}
+        {% block stylesheets %}
+        {{parent()}}
+
+        {% endblock %}
+
+
+
+        {% block body %}
+        
+        <h5> LISTADO DE EMPRESAS </h5>
+        
+        
+        {% if app.session.get('rol') == 'admin' %}
+        <form action="{{('/empresas_sector')}}" name="buscar_sector">
+                <label for="buscar_sector">Buscar por sector:</label>
+                <select name="buscarid">
+                  {% for sector in sectores %}
+                        <option value="{{sector.id}}"> {{sector.nombre }} </option>
+                 {% endfor %}
+                </select>
+                <input type="submit" value="Buscar" name="buscarsector">
+        </form>
+        {% endif %}
+        
+        <table class="table-responsive-sm table" >
+                <thead class="table-title">
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Email</th>
+                            <th>Sector de la empresa</th>
+                            <th></th>
+                        </tr>
+                </thead>
+                <tbody>
+                {% if empresas_id is defined %}
+                       
+                        {% for empresa in empresas_id %}
+                                <tr>
+
+                                    <td>{{ empresa.nombre }} </td>
+                                    <td>{{ empresa.email }}  </td>
+                                       {% for sector in sectores %}
+                                        {% if sector.id == empresa.idSector %}
+                                        <td> {{ sector.nombre }} </td>
+                                        {% endif %}
+                                  
+                                        {% endfor %}  
+                                        
+                                        <!-- solo admin -->
+                                        {% if app.session.get('rol') == 'admin' %}
+                                        <td>
+                                                <a href="{{ path ('editar_empresa' , {'id' : empresa.id }) }}"><button class="btn btn-secondary"> <i class="fa fa-edit"></i> Editar</button></a> 
+                                                <a href="{{ path ('eliminar_empresa' , {'id' : empresa.id }) }}"><button class="btn btn-secondary"> <i class="fa fa-minus-circle "></i> Eliminar</button></a>
+                                        </td>
+                                        {% endif %}
+                                        
+                                </tr> 
+
+
+                        {% endfor %}  
+                {% else %}
+                        {% for empresa in empresas %}
+                                <tr>
+                                {% if app.session.get('rol') == 'admin' %}
+                                    <td>{{ empresa.nombre }} </td>
+                                    <td>{{ empresa.email }}  </td>
+                                       {% for sector in sectores %}
+                                        {% if sector.id == empresa.idSector %}
+                                        <td> {{ sector.nombre }} </td>
+                                        {% endif %}
+                                         
+                                        {% endfor %}
+                                        <!--si el usuario es cliente -->
+
+                                        {% else %} 
+                                                {% for mi_sector in mis_sectores %}
+                                                {% for sector in sectores %}
+                                                        {% if empresa.idSector == sector.id %}
+                                                        {% if sector.id == mi_sector.idSector %}
+                                                        <tr>
+                                                                <td>{{ empresa.nombre }} </td>
+                                                                <td>{{ empresa.email }}  </td>
+                                                                <td> {{ sector.nombre }} </td>
+                                                        </tr>
+                                                        {% endif %}
+                                                        {% endif %}
+                                                {% endfor %}
+                                                {% endfor %}
+                                {% endif %}
+                                        <!-- solo admin -->
+                                        {% if app.session.get('rol') == 'admin' %}
+                                        <td>
+                                                <a href="{{ path ('editar_empresa' , {'id' : empresa.id }) }}"><button claa="btn btn-secondary"> <i class="fa fa-edit"></i> Editar</button></a> 
+                                                <a href="{{ path ('eliminar_empresa' , {'id' : empresa.id }) }}"><button claa="btn btn-secondary"> <i class="fa fa-minus-circle "></i> Eliminar</button></a>
+                                        </td>
+                                        {% endif %}
+                                        
+                                </tr> 
+
+
+                        {% endfor %}  
+                {% endif %}    
+                </tbody>
+        </table>
+
+
+        {% if app.session.get('rol') == 'admin' %}
+        <a href="{{('/nueva_empresa')}}"><button>Nueva empresa</button></a>
+        {% endif %}
+
+
+        {% endblock %}
+        {% block javascripts %}
+
+        {% endblock %}

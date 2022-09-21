@@ -1,0 +1,42 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+inicio:
+    path: /
+    controller: App\Controller\DefaultController::inicio
+eliminar_sector:
+    path: /eliminar_sector/{id}
+    controller: App\Controller\DefaultController::eliminar_sector
+eliminar_empresa:
+    path: /eliminar_empresa/{id}
+    controller: App\Controller\DefaultController::eliminar_empresa
+eliminar_usuario:
+    path: /eliminar_usuario/{id}
+    controller: App\Controller\DefaultController::eliminar_usuario
+editar_sector:
+    path: /editar_sector/{id}
+    controller: App\Controller\DefaultController::editar_sector
+quitar_sector:
+    path: /quitar_sector/{id}
+    controller: App\Controller\DefaultController::quitar_sector
+modifico_sector:
+    path: /modifico_sector/{id}
+    controller: App\Controller\DefaultController::modifico_sector
+editar_empresa:
+    path: /editar_empresa/{id}
+    controller: App\Controller\DefaultController::editar_empresa
+editar_usuario:
+    path: /editar_usuario/{id}
+    controller: App\Controller\DefaultController::editar_usuario
+modifico_empresa:
+    path: /modifico_empresa/{id}
+    controller: App\Controller\DefaultController::modifico_empresa
+modifico_usuario:
+    path: /modifico_usuario/{id}
+    controller: App\Controller\DefaultController::modifico_usuario
+asignar_sector:
+    path: /asignar_sector/{id}
+    controller: App\Controller\DefaultController::asignar_sector
+asignar:
+    path: /asignar/{id}
+    controller: App\Controller\DefaultController::asignar
